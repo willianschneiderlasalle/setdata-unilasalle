@@ -69,7 +69,7 @@ class HashTable(object):
         return False
 
     def _hashFunction(self, key, size):
-            return key % size
+        return key % size
  
     def _rehash(self, oldHash, size):
         return (oldHash+1) % size
