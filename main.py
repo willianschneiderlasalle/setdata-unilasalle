@@ -1,22 +1,19 @@
 from setfile import *
 
-mySetA = Set(6)
-mySetB = Set(6)
+dataA = [10, 122, 40, 44, 53, 22]
+mySetA = Set(dataA)
 
-setA = [10, 122, 40, 44, 53, 22]
-setB = [1, 122, 34, 44, 550, 22]
+dataB = [1, 122, 34, 44, 550, 22]
+mySetB = Set(dataB)
 
-for a in setA:
-    mySetA.insert(a)
-
-for b in setB:
-    mySetB.insert(b)
+print(mySetA.items())
+print(mySetB.items())
 
 mySetA.remove(122)
+mySetA.insert(223)
 
 print(mySetA.search(122))
 print(mySetA.search(10))
-print(mySetA.ht.values)
 
 print(union(mySetA, mySetB))
 print(intersection(mySetA, mySetB))

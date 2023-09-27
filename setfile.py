@@ -1,16 +1,40 @@
 from hashfile import HashTable
 
 class Set(object):
-    def __init__(self, size):
-        self.ht = HashTable(size)
+    def __init__(self, values):
+        self.ht = HashTable(len(values))
+
+        for x in range(len(values)):
+            self.ht._put(x, values[x])
 
     def insert(self, value):
-        self.ht._put(self.ht._getUsedSize(), value)
+        newTable = HashTable(self.ht._getUsedSize()+1)
+        
+        valid = 0
+        
+        for v in range(len(self.ht.values)):
+            if(self.ht.values[v] != None):
+                newTable._put(valid, self.ht.values[v])
+                valid += 1
+        
+        newTable._put(valid, value)
+
+        self.ht = newTable
 
     def remove(self,value):
         for k in self.ht.keys:
             if(self.ht._get(k) == value):
                 self.ht._delete(k)
+
+        newTable = HashTable(self.ht._getUsedSize())
+        valid = 0
+        
+        for v in range(len(self.ht.values)):
+            if(self.ht.values[v] != None):
+                newTable._put(valid, self.ht.values[v])
+                valid += 1
+
+        self.ht = newTable
 
     def search(self, value):
         for k in self.ht.values:
@@ -18,6 +42,9 @@ class Set(object):
                 return True
         
         return False
+    
+    def items(self):
+        return self.ht.values
 
 def union(setA, setB):
 
